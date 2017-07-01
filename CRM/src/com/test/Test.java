@@ -24,8 +24,9 @@ public class Test {
 
         User user =new User();
         user.setUsername("jack");
-        user.setPassword("123123");
+        user.setPassword("123rtrtwert123");
         user.setAge(14);
         userService.register(user);
     }
+
 }
