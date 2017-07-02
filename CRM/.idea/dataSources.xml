@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="springWeb@localhost" uuid="3345d5a1-4c77-495f-9181-1bb576183eeb">
+    <data-source source="LOCAL" name="ee19_crmdb@localhost" uuid="e4d1beeb-0e00-4bac-b7c8-55430749cdef">
       <driver-ref>mysql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/springWeb</jdbc-url>
+      <jdbc-url>jdbc:mysql://localhost:3306/ee19_crmdb</jdbc-url>
       <driver-properties>
         <property name="autoReconnect" value="true" />
         <property name="zeroDateTimeBehavior" value="convertToNull" />

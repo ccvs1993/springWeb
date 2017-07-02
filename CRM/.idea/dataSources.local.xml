@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="dataSourceStorageLocal">
-    <data-source name="springWeb@localhost" uuid="3345d5a1-4c77-495f-9181-1bb576183eeb">
+    <data-source name="ee19_crmdb@localhost" uuid="e4d1beeb-0e00-4bac-b7c8-55430749cdef">
       <database-info product="MySQL" version="5.7.17" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.40 ( Revision: 402933ef52cad9aa82624e80acbea46e3a701ce6 )">
         <extra-name-characters>#@</extra-name-characters>
         <identifier-quote-string>`</identifier-quote-string>
@@ -9,7 +9,7 @@
       <case-sensitivity plain-identifiers="mixed" quoted-identifiers="upper" />
       <secret-storage>master_key</secret-storage>
       <user-name>root</user-name>
-      <introspection-schemas>*:springWeb</introspection-schemas>
+      <introspection-schemas>*:ee19_crmdb</introspection-schemas>
     </data-source>
   </component>
 </project>

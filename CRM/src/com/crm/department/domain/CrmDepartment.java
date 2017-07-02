@@ -21,6 +21,14 @@ public class CrmDepartment {
     //dept-----post   一对多
     private Set<CrmPost> crmPostSet=new HashSet<>();
 
+    public Set<CrmPost> getCrmPostSet() {
+        return crmPostSet;
+    }
+
+    public void setCrmPostSet(Set<CrmPost> crmPostSet) {
+        this.crmPostSet = crmPostSet;
+    }
+
     public String getDepId() {
         return depId;
     }

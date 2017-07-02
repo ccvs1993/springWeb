@@ -6,6 +6,10 @@
 
 <struts>
     <constant name="struts.devMode" value="true"/>
+    <constant name="struts.enable.DynamicMethodInvocation" value="true"/>
     <constant name="struts.ui.theme" value="simple"/>
-    <include file="com/web/register-struts.xml"/>
+
+    <package name="common" namespace="/" extends="struts-default"/>
+
+    <include file="struts/struts-staff.xml"/>
 </struts>
