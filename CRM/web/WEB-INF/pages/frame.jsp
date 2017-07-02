@@ -7,15 +7,15 @@
 <title>CRM系统</title>
 </head>
 <frameset rows="90,*" framespacing="0px" frameborder="no">
-	<frame src="${pageContext.request.contextPath}/uiAction_top.action" scrolling="no"/>
+	<frame src="${pageContext.request.contextPath}/uiAction_frame_top.action" scrolling="no"/>
     <frameset id="main" cols="170,9,*" framespacing="0px" frameborder="no" >
         <frameset rows="30,*,40" framespacing="0px" frameborder="no" >
-			<frame src="${pageContext.request.contextPath}/uiAction_left1.action" scrolling="no"/>
-            <frame src="${pageContext.request.contextPath}/uiAction_left.action" scrolling="no"/>
-            <frame src="${pageContext.request.contextPath}/uiAction_left2.action" scrolling="no"/>
+			<frame src="${pageContext.request.contextPath}/uiAction_frame_left1.action" scrolling="no"/>
+            <frame src="${pageContext.request.contextPath}/uiAction_frame_left.action" scrolling="no"/>
+            <frame src="${pageContext.request.contextPath}/uiAction_frame_left2.action" scrolling="no"/>
         </frameset>
-        <frame src="${pageContext.request.contextPath}/uiAction_control.action" scrolling="no"/>
-        <frame src="${pageContext.request.contextPath}/uiAction_right.action" name="right" scrolling="yes"/>
+        <frame src="${pageContext.request.contextPath}/uiAction_frame_control.action" scrolling="no"/>
+        <frame src="${pageContext.request.contextPath}/uiAction_frame_right.action" name="right" scrolling="yes"/>
 	</frameset>
 </frameset>
 </html>

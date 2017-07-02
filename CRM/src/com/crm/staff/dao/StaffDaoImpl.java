@@ -5,6 +5,8 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import java.util.List;
+
 /**
  * Created by wangfei on 2017/7/2.
  */
@@ -23,5 +25,12 @@ public class StaffDaoImpl implements StaffDao{
                 .setParameter(0, loginName).setParameter(1, loginPwd);
         CrmStaff staff = (CrmStaff)query.uniqueResult();
         return staff;
+    }
+
+    @Override
+    public List<CrmStaff> findAll() {
+        Session session = sessionFactory.getCurrentSession();
+        List<CrmStaff> list = session.createQuery("select  s from CrmStaff s").list();
+        return list;
     }
 }

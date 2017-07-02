@@ -7,6 +7,8 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
+
 /**
  * Created by wangfei on 2017/7/2.
  */
@@ -37,5 +39,11 @@ public class StaffAction extends ActionSupport implements ModelDriven<CrmStaff>{
 
    public String home(){
        return "home";
+   }
+   //查询所有员工信息
+   public String findAll(){
+       List<CrmStaff> allStaff = staffService.findAllStaff();
+       ActionContext.getContext().put("allStaff",allStaff);
+       return "findAll";
    }
 }

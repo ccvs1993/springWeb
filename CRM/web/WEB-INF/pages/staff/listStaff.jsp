@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -83,31 +84,19 @@
     <td width="10%" align="center">编辑</td>
   </tr>
   
-    
-	  <tr class="tabtd1"> 
-	    <td align="center">管理员</td>
-	    <td align="center"></td>
-	    <td align="center"></td>
-	    <td align="center"></td>
-	    <td align="center"></td>
+    <s:iterator value="#allStaff" status="vs">
+	  <tr class="<s:property value="#vs.even?'tabtd1':'tabtd2'"/>">
+	    <td align="center"><s:property value="staffName"/></td>
+	    <td align="center"><s:property value="gender"/></td>
+	    <td align="center"><s:date name="onDutyDate" format="yyyy-MM-dd"/></td>
+		  <td align="center"><s:property value="crmPost.crmDepartment.depName"/></td>
+		  <td align="center"><s:property value="crmPost.postName"/></td>
 	  	<td width="7%" align="center">
-	  		
-	  		<a href="${pageContext.request.contextPath}/pages/staff/editStaff.jsp"><img src="${pageContext.request.contextPath}/images/button/modify.gif" class="img" /></a>	
-	  	</td>
-	  	
-	  </tr>
-    
-	  <tr class="tabtd2"> 
-	    <td align="center">肉丝</td>
-	    <td align="center">女</td>
-	    <td align="center">2013-04-16</td>
-	    <td align="center">咨询部</td>
-	    <td align="center">主管</td>
-	  	<td width="7%" align="center">
-	  		
 	  		<a href="${pageContext.request.contextPath}/pages/staff/editStaff.jsp"><img src="${pageContext.request.contextPath}/images/button/modify.gif" class="img" /></a>	
 	  	</td>
 	  </tr>
+	</s:iterator>
+
 </table>
 
 
