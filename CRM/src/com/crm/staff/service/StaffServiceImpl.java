@@ -2,6 +2,7 @@ package com.crm.staff.service;
 
 import com.crm.staff.dao.StaffDao;
 import com.crm.staff.domain.CrmStaff;
+import com.crm.util.MyStringUtils;
 
 /**
  * Created by wangfei on 2017/7/2.
@@ -16,6 +17,7 @@ public class StaffServiceImpl implements StaffService{
 
     @Override
     public CrmStaff login(CrmStaff crmStaff) {
-        return staffDao.find(crmStaff.getLoginName(),crmStaff.getLoginPwd());
+        String loginPwd = MyStringUtils.getMD5Value(crmStaff.getLoginPwd());
+        return staffDao.find(crmStaff.getLoginName(),loginPwd);
     }
 }
