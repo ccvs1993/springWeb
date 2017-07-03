@@ -33,4 +33,12 @@ public class StaffDaoImpl implements StaffDao{
         List<CrmStaff> list = session.createQuery("select  s from CrmStaff s").list();
         return list;
     }
+
+    @Override
+    public CrmStaff findByID(String staffId) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("select s from CrmStaff s where s.staffId=?").setParameter(0, staffId);
+        CrmStaff staff = (CrmStaff)query.uniqueResult();
+        return staff;
+    }
 }

@@ -10,4 +10,6 @@ import java.util.List;
 public interface StaffDao {
     public CrmStaff find(String loginName,String loginPwd);
     public List<CrmStaff> findAll();
+    //根据ID查询
+    public CrmStaff findByID(String staffId);
 }

@@ -10,14 +10,10 @@
 						http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
 
-        <bean id="staffDao" class="com.crm.staff.dao.StaffDaoImpl" parent="baseDAO">
+        <bean id="departmentDao" class="com.crm.department.dao.DepartmentDaoImpl" parent="baseDAO">
         </bean>
 
-        <bean id="staffService" class="com.crm.staff.service.StaffServiceImpl">
-                <property name="staffDao" ref="staffDao"/>
-        </bean>
-        <bean id="staffAction" class="com.crm.staff.web.StaffAction" scope="prototype">
-                <property name="staffService" ref="staffService"/>
-                <property name="departmentService" ref="departmentService"/>
+        <bean id="departmentService" class="com.crm.department.service.DepartmentServiceImpl">
+                <property name="departmentDao" ref="departmentDao"/>
         </bean>
 </beans>

@@ -1,5 +1,7 @@
 package com.crm.staff.web;
 
+import com.crm.department.domain.CrmDepartment;
+import com.crm.department.service.DepartmentService;
 import com.crm.staff.domain.CrmStaff;
 import com.crm.staff.service.StaffService;
 import com.opensymphony.xwork2.ActionContext;
@@ -23,7 +25,11 @@ public class StaffAction extends ActionSupport implements ModelDriven<CrmStaff>{
     public void setStaffService(StaffService staffService) {
         this.staffService = staffService;
     }
+    private DepartmentService departmentService;
 
+    public void setDepartmentService(DepartmentService departmentService) {
+        this.departmentService = departmentService;
+    }
     ////////////////////////////////////////////////////////////
 
 
@@ -46,4 +52,14 @@ public class StaffAction extends ActionSupport implements ModelDriven<CrmStaff>{
        ActionContext.getContext().put("allStaff",allStaff);
        return "findAll";
    }
+   //编辑员工之前查找员工
+    public String editUI(){
+        CrmStaff findStaff=staffService.findById(crmStaff.getStaffId());
+        ActionContext.getContext().getValueStack().push(findStaff);
+        //查找部门
+        List<CrmDepartment> allDepartment = departmentService.findAll();
+        ActionContext.getContext().getValueStack().set("allDepartment",allDepartment);
+
+        return "editUI";
+    }
 }

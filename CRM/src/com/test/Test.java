@@ -1,6 +1,8 @@
 package com.test;
 
 
+import com.crm.department.domain.CrmDepartment;
+import com.crm.department.service.DepartmentService;
 import com.crm.staff.domain.CrmStaff;
 import com.crm.staff.service.StaffService;
 import org.hibernate.Session;
@@ -9,6 +11,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.util.List;
 
 
 /**
@@ -19,6 +23,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class Test {
     @Autowired
     private StaffService staffService;
+    @Autowired
+    private DepartmentService departmentService;
     @org.junit.Test
     public void test() {
         CrmStaff staff=new CrmStaff();
@@ -28,4 +34,17 @@ public class Test {
         System.out.println(staff1);
     }
 
+    @org.junit.Test
+    public void testFindById() {
+        CrmStaff staff = staffService.findById("2c9091c14c78e58b014c78e759b40006");
+        System.out.println(staff);
+    }
+
+    @org.junit.Test
+    public void testFindDept() {
+        List<CrmDepartment> ls = departmentService.findAll();
+        for (CrmDepartment l : ls) {
+            System.out.println(l);
+        }
+    }
 }
