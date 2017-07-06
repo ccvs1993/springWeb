@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -27,9 +28,9 @@
 			<img src="${pageContext.request.contextPath}/images/button/gaojichaxun.gif" />
 		</a>      
     	<%--编辑前：添加类别 --%>
-    	<a href="${pageContext.request.contextPath}/pages/coursetype/addOrEditCourse.jsp">
-	       	<img src="${pageContext.request.contextPath}/images/button/tianjia.gif" />
-    	</a>
+		<s:a namespace="/" action="courseAction_editUI">
+			<img src="${pageContext.request.contextPath}/images/button/tianjia.gif" />
+		</s:a>
     </td>
     <td width="3%" align="right"><img src="${pageContext.request.contextPath}/images/tright.gif"/></td>
   </tr>
@@ -76,28 +77,20 @@
 	<td width="11%" align="center">编辑</td>
   </tr>
   <%--数据展示，单行：tabtd1；双行：tabtd2 --%>
-   <tr class="tabtd1">
-	    <td align="center">java基础 </td>
-	    <td align="center"> </td>
-	    <td align="center">1000</td>
-	    <td align="center">2000.0</td>
+	<s:iterator value="allCourse" status="vs">
+   <tr class="<s:property value="#vs.even?'tabtd1':'tabtd2'"/>">
+	    <td align="center"><s:property value="courseName"/></td>
+	    <td align="center"><s:property value="remark"/></td>
+	    <td align="center"><s:property value="total"/></td>
+	    <td align="center"><s:property value="courseCost"/></td>
 	  	<td width="11%" align="center">
-	  		
-	  		<a href="${pageContext.request.contextPath}/pages/coursetype/addOrEditCourse.jsp"><img src="${pageContext.request.contextPath}/images/button/modify.gif" class="img" /></a>
-	  	</td>
+	  		<s:a namespace="/" action="courseAction_editUI">
+				<s:param name="courseTypeId" value="%{courseTypeId}"/>
+				<img src="${pageContext.request.contextPath}/images/button/modify.gif" class="img" />
+			</s:a>
+		</td>
 	  </tr>
-  
- 
-	  <tr class="tabtd2">
-	    <td align="center">java就业 </td>
-	    <td align="center"> </td>
-	    <td align="center">4000</td>
-	    <td align="center">18000.0</td>
-	  	<td width="11%" align="center">
-	  		
-	  		<a href="${pageContext.request.contextPath}/pages/coursetype/addOrEditCourse.jsp"><img src="${pageContext.request.contextPath}/images/button/modify.gif" class="img" /></a>
-	  	</td>
-	  </tr>
+	</s:iterator>
 
  
 </table>
