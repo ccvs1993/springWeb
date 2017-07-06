@@ -26,6 +26,43 @@ public class CrmCourseType {
 
    //courseType -> class 一个课程可以有多个班级  一对多
     private Set<CrmClasses> crmClassesSet=new HashSet<>();
+    //用于条件查询
+    private String totalStart;
+    private String totalEnd;
+    private String lessonCostStart;
+    private String lessonCostEnd;
+
+    public void setTotalStart(String totalStart) {
+        this.totalStart = totalStart;
+    }
+
+    public void setTotalEnd(String totalEnd) {
+        this.totalEnd = totalEnd;
+    }
+
+    public void setLessonCostStart(String lessonCostStart) {
+        this.lessonCostStart = lessonCostStart;
+    }
+
+    public void setLessonCostEnd(String lessonCostEnd) {
+        this.lessonCostEnd = lessonCostEnd;
+    }
+
+    public String getTotalStart() {
+        return totalStart;
+    }
+
+    public String getTotalEnd() {
+        return totalEnd;
+    }
+
+    public String getLessonCostStart() {
+        return lessonCostStart;
+    }
+
+    public String getLessonCostEnd() {
+        return lessonCostEnd;
+    }
 
     @Override
     public String toString() {

@@ -8,7 +8,7 @@ import java.util.List;
  * Created by wangfei on 2017/7/6.
  */
 public interface CourseTypeDao {
-    public List<CrmCourseType> findAll();
+    public List<CrmCourseType> findAll(String contidtions,Object[] params);
     public CrmCourseType findById(CrmCourseType courseType);
     public void saveOrUpdate(CrmCourseType courseType);
 }

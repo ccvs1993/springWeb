@@ -2,6 +2,9 @@ package com.test;
 
 
 import com.alibaba.fastjson.JSON;
+import com.crm.course.dao.CourseTypeDao;
+import com.crm.course.domain.CrmCourseType;
+import com.crm.course.service.CourseTypeService;
 import com.crm.department.domain.CrmDepartment;
 import com.crm.department.service.DepartmentService;
 import com.crm.post.domain.CrmPost;
@@ -31,6 +34,8 @@ public class Test {
 
     @Autowired
     private CrmPostService postService;
+    @Autowired
+    private CourseTypeService courseTypeService;
 
     @org.junit.Test
     public void test() {
@@ -66,5 +71,18 @@ public class Test {
         }
         }
         System.out.println("over");
+    }
+
+    @org.junit.Test
+    public void testCourseFindAll() {
+        CrmCourseType crmCourseType=new CrmCourseType();
+        crmCourseType.setCourseName("java");
+        courseTypeService.findAll(crmCourseType);
+//        String conditions=" and courseName like ";
+//        Object[] params={"%java%"};
+        List<CrmCourseType> all = courseTypeService.findAll(crmCourseType);
+        for (CrmCourseType courseType : all) {
+            System.out.println(courseType);
+        }
     }
 }

@@ -1,6 +1,7 @@
 package com.crm.course.dao;
 
 import com.crm.course.domain.CrmCourseType;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
@@ -17,9 +18,19 @@ public class CourseTypeDaoImpl implements CourseTypeDao {
     }
 
     @Override
-    public List<CrmCourseType> findAll() {
+    public List<CrmCourseType> findAll(String contidtions,Object[] params) {
+        String hql="from CrmCourseType where 1=1 "+contidtions;
+        System.out.println(hql);
+        for (int i = 0; i < params.length; i++) {
+            System.out.println(params[i]);
+        }
         Session session = sessionFactory.getCurrentSession();
-        List list = session.createQuery("from CrmCourseType").list();
+
+        Query query = session.createQuery(hql);
+        for (int i = 0; i < params.length; i++) {
+            query.setParameter(i,params[i]);
+        }
+        List list = query.list();
         return list;
     }
 

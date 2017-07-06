@@ -23,9 +23,12 @@ public class CourseAction extends ActionSupport implements ModelDriven<CrmCourse
     public void setCourseTypeService(CourseTypeService courseTypeService) {
         this.courseTypeService = courseTypeService;
     }
+
+
+
     /////////////////////////////////////////////////////////////
     public String findAll(){
-        List<CrmCourseType> allCourse = courseTypeService.findAll();
+        List<CrmCourseType> allCourse = courseTypeService.findAll(crmCourseType);
         ActionContext.getContext().getValueStack().set("allCourse",allCourse);
         return "findAll";
     }
