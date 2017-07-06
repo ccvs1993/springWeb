@@ -13,4 +13,5 @@ public interface StaffService {
     public CrmStaff findById(String staffId);
 
     public void updateStaff(CrmStaff crmStaff);
+    public void saveOrUpdate(CrmStaff crmStaff);
 }

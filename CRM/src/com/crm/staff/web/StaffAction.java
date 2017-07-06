@@ -57,16 +57,22 @@ public class StaffAction extends ActionSupport implements ModelDriven<CrmStaff>{
        if(crmStaff.getStaffId()!=null) {
            CrmStaff findStaff = staffService.findById(crmStaff.getStaffId());
            ActionContext.getContext().getValueStack().push(findStaff);
+       }
            //查找部门
            List<CrmDepartment> allDepartment = departmentService.findAll();
            ActionContext.getContext().getValueStack().set("allDepartment", allDepartment);
-       }
+
         return "editUI";
     }
 
     //保存编辑好的员工
     public String edit(){
-        staffService.updateStaff(crmStaff);
+        if(crmStaff.getStaffId()!=null){
+            staffService.updateStaff(crmStaff);
+        }
+        else{
+            staffService.saveOrUpdate(crmStaff);
+        }
         return "edit";
     }
 }

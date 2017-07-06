@@ -36,19 +36,21 @@ public class StaffServiceImpl implements StaffService{
 
     @Override
     public void updateStaff(CrmStaff crmStaff) {
-        System.out.println("============传入============");
-        System.out.println(crmStaff);
         CrmStaff staff = staffDao.findByID(crmStaff.getStaffId());
-        System.out.println("============查找============");
-        System.out.println(staff);
         // 判断密码是否被修改
         if(!staff.getLoginPwd().equals(crmStaff.getLoginPwd())){
             staff.setLoginPwd(MyStringUtils.getMD5Value(crmStaff.getLoginPwd()));
         }
+        //利用一级缓存改变自动保存
         staff.setStaffName(crmStaff.getStaffName());
         staff.setLoginName(crmStaff.getLoginName());
         staff.setCrmPost(crmStaff.getCrmPost());
         staff.setGender(crmStaff.getGender());
         staff.setOnDutyDate(crmStaff.getOnDutyDate());
+    }
+
+    @Override
+    public void saveOrUpdate(CrmStaff crmStaff) {
+            staffDao.saveOrUpdate(crmStaff);
     }
 }

@@ -42,4 +42,14 @@ public class StaffDaoImpl implements StaffDao{
         return staff;
     }
 
+    @Override
+    public void saveOrUpdate(CrmStaff crmStaff) {
+        Session session = sessionFactory.getCurrentSession();
+        if(crmStaff.getStaffId()!=null){
+            session.update(crmStaff);
+        }else {
+            session.save(crmStaff);
+        }
+    }
+
 }

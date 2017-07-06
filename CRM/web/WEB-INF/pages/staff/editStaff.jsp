@@ -35,8 +35,9 @@
   </tr>
 </table>
 <s:form namespace="/" action="staffAction_edit" method="POST">
-	<s:hidden name="staffId" value="%{staffId}"/>
-
+	<s:if test="staffId!=null">
+		<s:hidden name="staffId" value="%{staffId}"/>
+	</s:if>
 	<table width="88%" border="0" class="emp_table" style="width:80%;">
 
 	 <tr>

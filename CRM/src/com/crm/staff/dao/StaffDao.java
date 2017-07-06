@@ -12,4 +12,5 @@ public interface StaffDao {
     public List<CrmStaff> findAll();
     //根据ID查询
     public CrmStaff findByID(String staffId);
+    public void saveOrUpdate(CrmStaff crmStaff);
 }
