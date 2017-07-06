@@ -41,4 +41,5 @@ public class StaffDaoImpl implements StaffDao{
         CrmStaff staff = (CrmStaff)query.uniqueResult();
         return staff;
     }
+
 }

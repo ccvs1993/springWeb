@@ -1,8 +1,11 @@
 package com.test;
 
 
+import com.alibaba.fastjson.JSON;
 import com.crm.department.domain.CrmDepartment;
 import com.crm.department.service.DepartmentService;
+import com.crm.post.domain.CrmPost;
+import com.crm.post.service.CrmPostService;
 import com.crm.staff.domain.CrmStaff;
 import com.crm.staff.service.StaffService;
 import org.hibernate.Session;
@@ -25,6 +28,10 @@ public class Test {
     private StaffService staffService;
     @Autowired
     private DepartmentService departmentService;
+
+    @Autowired
+    private CrmPostService postService;
+
     @org.junit.Test
     public void test() {
         CrmStaff staff=new CrmStaff();
@@ -46,5 +53,18 @@ public class Test {
         for (CrmDepartment l : ls) {
             System.out.println(l);
         }
+    }
+
+    @org.junit.Test
+    public void testFindPostWithDept() {
+        CrmDepartment department=new CrmDepartment();
+        department.setDepId("2c9091c14c78e58b014c78e67de10001");
+        List<CrmPost> posts = postService.findAll(department);
+        if(posts.size()>0) {
+        for (CrmPost post : posts) {
+            System.out.println(post);
+        }
+        }
+        System.out.println("over");
     }
 }

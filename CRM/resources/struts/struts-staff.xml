@@ -15,6 +15,8 @@
             <result name="findAll">/WEB-INF/pages/staff/listStaff.jsp</result>
 
             <result name="editUI">/WEB-INF/pages/staff/editStaff.jsp</result>
+
+            <result name="edit" type="redirectAction">staffAction_findAll</result>
         </action>
     </package>
 

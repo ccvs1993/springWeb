@@ -34,10 +34,8 @@
     <td width="3%" align="right"><img src="${pageContext.request.contextPath}/images/tright.gif"/></td>
   </tr>
 </table>
-
-<form action="/crm2/staff/staffAction_edit.action" method="post">
-	
-	<input type="hidden" name="staffId" value="2c9091c14c78e58b014c78e7ecd90007"/>
+<s:form namespace="/" action="staffAction_edit" method="POST">
+	<s:hidden name="staffId" value="%{staffId}"/>
 
 	<table width="88%" border="0" class="emp_table" style="width:80%;">
 
@@ -45,7 +43,7 @@
 	    <td>登录名：</td>
 	    <td><s:textfield name="loginName"/></td>
 	    <td>密码：</td>
-	    <td><s:password value="loginPwd" showPassword="true"/></td>
+	    <td><s:password name="loginPwd" showPassword="true"/></td>
 	  </tr>
 	 <tr>
 	    <td>姓名：</td>
@@ -60,19 +58,14 @@
 	    <td width="20%">
 			<s:select list="allDepartment" name="crmPost.crmDepartment.depId"
 			listKey="depId" listValue="depName"
-			headerKey="" headerValue="请选择"/>
-	    	<%--<select name="crmPost.crmDepartment.depId"  onchange="changePost(this)">--%>
-			    <%--<option value="">----请--选--择----</option>--%>
-			    <%--<option value="2c9091c14c78e58b014c78e67de10001" selected="selected">java学院</option>--%>
-			    <%--<option value="2c9091c14c78e58b014c78e68ded0002">咨询部</option>--%>
-			<%--</select>--%>
+			headerKey="" headerValue="请选择"  onchange="showPost(this);"/>
 
 	    </td>
 	    <td width="8%">职务：</td>
 	    <td width="62%">
 			<s:select list="crmPost!=null ? crmPost.crmDepartment.crmPostSet:{}" name="crmPost.postId"
 			listKey="postId" listValue="postName"
-			headerKey="" headerValue="请选择"/>
+			headerKey="" headerValue="请选择" id="postSelected"/>
 	    </td>
 	  </tr>
 	  <tr>
@@ -80,13 +73,49 @@
 	    <td width="20%">
 			<s:date name="onDutyDate" format="yyyy-MM-dd" var="myDate"/>
 			<s:textfield name="onDutyDate" readonly="true" value="%{#myDate}" onfocus="c.showMoreDay=true; c.show(this);"/>
-	    	<%--<input type="text" name="onDutyDate" value="2014-04-24" readonly="readonly" onfocus="c.showMoreDay=true; c.show(this);"/>--%>
 	    </td>
 	    <td width="8%"></td>
 	    <td width="62%"></td>
 	  </tr>
 	</table>
-</form>
+		</s:form>
+
+<script type="text/javascript">
+	function showPost(obj) {
+		var depId = obj.value;
+		var xmlhttp=null;
+        if (window.XMLHttpRequest){// code for all new browsers
+            xmlhttp=new XMLHttpRequest();
+        } else if (window.ActiveXObject) {// code for IE5 and IE6
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        //设置回调函数
+        xmlhttp.onreadystatechange=function () {
+			if(xmlhttp.readyState==4 && xmlhttp.status==200){
+                var text = xmlhttp.responseText;
+                //将字符串转换成json对象
+				var jsonObject = eval("("+text+")");
+
+				var psotSelectElement = document.getElementById("postSelected");
+                psotSelectElement.innerHTML="<option value=''>请选择</option>";
+
+                //遍历
+				for (var i=0;i<jsonObject.length;i++){
+				    var postObj=jsonObject[i];
+				    var postId=postObj.postId;
+				    var postName=postObj.postName;
+                    psotSelectElement.innerHTML+="<option value='"+postId+"'>"+postName+"</option>";
+				}
+
+			}
+        };
+//        创建连接
+        var url="${pageContext.request.contextPath}/postAction_findAllWithDepartment?crmDepartment.depId="+depId;
+        xmlhttp.open("GET",url);
+        //发送请求
+		xmlhttp.send(null);
+    }
+</script>
 
 </body>
 </html>
