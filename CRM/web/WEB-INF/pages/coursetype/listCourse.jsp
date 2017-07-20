@@ -37,9 +37,10 @@
   </tr>
 </table>
 
-
+<s:debug/>
 <%--条件查询 start --%>
 <s:form action="courseAction_findAll" namespace="/" method="POST">
+	<s:hidden name="pageNum" value="1" id="pageNum"/>
 	<table width="88%" border="0" class="emp_table" style="width:80%;">
 	  <tr>
 	    <td width="10%">课程类别：</td>
@@ -63,6 +64,7 @@
 <%--条件查询 end --%>
 
 <table border="0" cellspacing="0" cellpadding="0" style="margin-top:5px;">
+
   <tr>
     <td ><img src="${pageContext.request.contextPath}/images/result.gif"/></td>
   </tr>
@@ -77,7 +79,7 @@
 	<td width="11%" align="center">编辑</td>
   </tr>
   <%--数据展示，单行：tabtd1；双行：tabtd2 --%>
-	<s:iterator value="allCourse" status="vs">
+	<s:iterator value="data"  status="vs">
    <tr class="<s:property value="#vs.even?'tabtd1':'tabtd2'"/>">
 	    <td align="center"><s:property value="courseName"/></td>
 	    <td align="center"><s:property value="remark"/></td>
@@ -97,15 +99,31 @@
 <table border="0" cellspacing="0" cellpadding="0" align="center">
   <tr>
     <td align="right">
-    	<span>第1/3页</span>
+    	<span>第<s:property value="pageNum"/>/<s:property value="totalPage"/> 页</span>
         <span>
-        	<a href="#">[首页]</a>&nbsp;&nbsp;
-            <a href="#">[上一页]</a>&nbsp;&nbsp;
-            <a href="#">[下一页]</a>&nbsp;&nbsp;
-            <a href="#">[尾页]</a>
+			<s:if test="pageNum > 1">
+				<a href="javascript:void(0)" onclick="showPage(<s:property value="1"/> )">[首页]</a>&nbsp;&nbsp;
+				<a href="javascript:void(0)" onclick="showPage(<s:property value="pageNum-1"/> )">[上一页]</a>&nbsp;&nbsp;
+			</s:if>
+
+			<s:iterator begin="start" end="end" var="num">
+				<a href="javascript:void(0)" onclick="showPage(<s:property value="#num"/>)"><s:property value="#num"/></a>&nbsp;&nbsp;
+			</s:iterator>
+
+			<s:if test="pageNum < totalPage">
+				<a href="javascript:void(0)" onclick="showPage(<s:property value="pageNum+1"/> )">[下一页]</a>&nbsp;&nbsp;
+				<a href="javascript:void(0)" onclick="showPage(<s:property value="totalPage"/> )">[尾页]</a>
+			</s:if>
         </span>
     </td>
   </tr>
 </table>
+
+<script type="text/javascript">
+	function showPage(num) {
+		document.getElementById("pageNum").value=num;
+		document.forms[0].submit();
+    }
+</script>
 </body>
 </html>

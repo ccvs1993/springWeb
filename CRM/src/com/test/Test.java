@@ -7,6 +7,7 @@ import com.crm.course.domain.CrmCourseType;
 import com.crm.course.service.CourseTypeService;
 import com.crm.department.domain.CrmDepartment;
 import com.crm.department.service.DepartmentService;
+import com.crm.page.PageBean;
 import com.crm.post.domain.CrmPost;
 import com.crm.post.service.CrmPostService;
 import com.crm.staff.domain.CrmStaff;
@@ -84,5 +85,14 @@ public class Test {
         for (CrmCourseType courseType : all) {
             System.out.println(courseType);
         }
+    }
+
+    @org.junit.Test
+    public void testConditionQueryAndPageDivide() {
+        CrmCourseType crmCourseType=new CrmCourseType();
+        crmCourseType.setCourseName("java");
+        PageBean<CrmCourseType> pageBean = courseTypeService.findAll(crmCourseType, 1, 1);
+        System.out.println(pageBean.getData());
+
     }
 }

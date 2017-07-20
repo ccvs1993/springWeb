@@ -20,16 +20,10 @@ public class CourseTypeDaoImpl implements CourseTypeDao {
     @Override
     public List<CrmCourseType> findAll(String contidtions,Object[] params) {
         String hql="from CrmCourseType where 1=1 "+contidtions;
-        System.out.println(hql);
-        for (int i = 0; i < params.length; i++) {
-            System.out.println(params[i]);
-        }
         Session session = sessionFactory.getCurrentSession();
 
         Query query = session.createQuery(hql);
-        for (int i = 0; i < params.length; i++) {
-            query.setParameter(i,params[i]);
-        }
+        setParameter(query,params);
         List list = query.list();
         return list;
     }
@@ -44,10 +38,34 @@ public class CourseTypeDaoImpl implements CourseTypeDao {
     @Override
     public void saveOrUpdate(CrmCourseType courseType) {
         Session session = sessionFactory.getCurrentSession();
-        if(courseType.getCourseTypeId()!=null){
-            session.update(courseType);
-        }else {
-            session.save(courseType);
+        session.saveOrUpdate(courseType);
+    }
+
+    @Override
+    public int getTotalRecord(String contidtions, Object[] params) {
+        String hql="select count(c) from CrmCourseType c where 1=1 "+contidtions;
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery(hql);
+        setParameter(query,params);
+        Long result = (Long) query.uniqueResult();
+        return result.intValue();
+
+    }
+
+    @Override
+    public List<CrmCourseType> findAll(String contidtions, Object[] params, int startIndex, int pageSize) {
+        String hql="from CrmCourseType where 1=1 "+contidtions;
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery(hql);
+        setParameter(query,params);
+        query.setFirstResult(startIndex);
+        query.setMaxResults(pageSize);
+        return query.list();
+    }
+
+    private void setParameter(Query query,Object[] params){
+        for (int i = 0; i < params.length; i++) {
+            query.setParameter(i,params[i]);
         }
     }
 }

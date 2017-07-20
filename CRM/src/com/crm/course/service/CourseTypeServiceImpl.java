@@ -2,6 +2,7 @@ package com.crm.course.service;
 
 import com.crm.course.dao.CourseTypeDao;
 import com.crm.course.domain.CrmCourseType;
+import com.crm.page.PageBean;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
@@ -23,6 +24,42 @@ public class CourseTypeServiceImpl implements CourseTypeService{
         StringBuilder conditions=new StringBuilder(200);
         List<Object> params=new ArrayList<>();
 
+        createQueryCondition(crmCourseType, conditions, params);
+
+
+        List<CrmCourseType> allCourse = courseTypeDao.findAll(conditions.toString(),params.toArray());
+        return allCourse;
+    }
+
+    @Override
+    public CrmCourseType findById(CrmCourseType courseType) {
+        CrmCourseType crmCourseType = courseTypeDao.findById(courseType);
+        return crmCourseType;
+    }
+
+    @Override
+    public void saveOrUpdate(CrmCourseType courseType) {
+        courseTypeDao.saveOrUpdate(courseType);
+    }
+
+    @Override
+    public PageBean<CrmCourseType> findAll(CrmCourseType courseType, int pageNum, int pageSize) {
+        StringBuilder conditions=new StringBuilder(200);
+        List<Object> params=new ArrayList<>();
+        createQueryCondition(courseType,conditions,params);
+
+        int totalRecord = courseTypeDao.getTotalRecord(conditions.toString(), params.toArray());
+        PageBean<CrmCourseType> pageBean=new PageBean<>(pageNum,pageSize,totalRecord);
+
+
+        List<CrmCourseType> data = courseTypeDao.findAll(conditions.toString(), params.toArray(), pageBean.getStartIndex(), pageBean.getPageSize());
+
+        pageBean.setData(data);
+
+        return pageBean;
+    }
+
+    private void createQueryCondition(CrmCourseType crmCourseType, StringBuilder conditions, List<Object> params) {
         if(StringUtils.isNotBlank(crmCourseType.getCourseName())){
             conditions.append(" and courseName like ? ");
             params.add("%"+crmCourseType.getCourseName()+"%");
@@ -52,20 +89,5 @@ public class CourseTypeServiceImpl implements CourseTypeService{
             conditions.append(" and courseCost <= ? ");
             params.add(Double.parseDouble(crmCourseType.getLessonCostEnd()));
         }
-
-
-        List<CrmCourseType> allCourse = courseTypeDao.findAll(conditions.toString(),params.toArray());
-        return allCourse;
-    }
-
-    @Override
-    public CrmCourseType findById(CrmCourseType courseType) {
-        CrmCourseType crmCourseType = courseTypeDao.findById(courseType);
-        return crmCourseType;
-    }
-
-    @Override
-    public void saveOrUpdate(CrmCourseType courseType) {
-        courseTypeDao.saveOrUpdate(courseType);
     }
 }

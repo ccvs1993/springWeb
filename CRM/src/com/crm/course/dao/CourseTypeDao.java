@@ -11,4 +11,8 @@ public interface CourseTypeDao {
     public List<CrmCourseType> findAll(String contidtions,Object[] params);
     public CrmCourseType findById(CrmCourseType courseType);
     public void saveOrUpdate(CrmCourseType courseType);
+    //查询总记录数
+    public int getTotalRecord(String contidtions,Object[] params);
+    //分页查询
+    public List<CrmCourseType> findAll(String contidtions,Object[] params,int startIndex,int pageSize);
 }
